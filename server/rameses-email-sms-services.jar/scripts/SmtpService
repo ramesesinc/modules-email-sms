@@ -13,7 +13,6 @@ public class SmtpService  {
 
 	@ProxyMethod
 	public def send( o ) {
-		println "entering service now " + mailSvc;
 		if ( !o.to ) throw new Exception("to is required in LocalSmtpService");
 		if ( !o.subject ) throw new Exception("subject is required in LocalSmtpService"); 
 		if ( !o.message ) throw new Exception("message is required in LocalSmtpService"); 
@@ -54,7 +53,7 @@ public class SmtpService  {
 	         	message.setContent(multipart); 
             } 
             else if ( txtmsg ) { 
-            	message.setText(txtmsg);
+            	message.setContent(txtmsg, "text/html");
             }
 
             Transport.send(message); 
