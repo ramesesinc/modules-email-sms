@@ -1,0 +1,9 @@
+<workunit>
+    <invokers>
+        <invoker type="mail_sender" caption="Mail Sender" action="init" index="1" target="popup"/>
+    </invokers>
+    <code class="com.rameses.email.models.MailSenderModel" />
+    <pages>s
+        <page template="com.rameses.email.views.MailSenderPage" />
+    </pages>
+</workunit>
