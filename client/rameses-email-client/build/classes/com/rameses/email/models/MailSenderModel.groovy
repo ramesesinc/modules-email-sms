@@ -54,8 +54,8 @@ public class MailSenderModel {
         mail.message = buildMessage();
         if(attachments) {
             attachments.each {
-                if(!it.params) it.params = [entity: entity];
-                it.opener = Inv.lookupOpener( it.handler, it.params );
+                if(!it.params) it.params = [entity: entity, caller: caller ];
+                if(it.handler) it.opener = Inv.lookupOpener( it.handler, it.params );
                 it.file = new File( it.filename );
             }
         }
@@ -70,8 +70,13 @@ public class MailSenderModel {
             if(attachments) {
                 mail.attachments = [];
                 attachments.each { a->
-                     a.opener.handle.exportToPDF(a.file);
-                     mail.attachments << a.filename;
+                    if( a.exportToFile ) {
+                        a.exportToFile( a.file );
+                    }
+                    else {
+                        a.opener.handle.exportToPDF(a.file);
+                    }
+                    mail.attachments << a.filename;
                 }
             }
             MailSender ms = new MailSender(conf);

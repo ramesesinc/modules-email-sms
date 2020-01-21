@@ -52,13 +52,17 @@ public class MailSender {
             Properties properties = new Properties();
             properties.setProperty("mail.smtp.host", smtphost); 
             properties.setProperty("mail.smtp.port", "25");
+            
+            if( info.containsKey("debug")) {
+                properties.setProperty("mail.debug", info.get("debug").toString() );                
+            }
+            
             Session session = Session.getDefaultInstance( properties );   
 
             MimeMessage message = new MimeMessage(session);  
             if(from !=null ) message.setFrom(new InternetAddress(from));  
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to)); 
             if (subject !=null ) message.setSubject(subject); 
-
             if ( attachments!=null && attachments.size() > 0 ) {
                 Multipart multipart = new MimeMultipart();
                 BodyPart messageBodyPart = new MimeBodyPart();
@@ -77,13 +81,14 @@ public class MailSender {
             else if ( msg != null ) { 
                 message.setContent(msg, "text/html");
             }
-
-            Transport.send(message); 
+            Transport.send(message);
         } 
         catch (RuntimeException re) { 
+            re.printStackTrace();
             throw re;  
         } 
         catch (Exception e) {  
+            e.printStackTrace();
             throw e; 
         } 
         
