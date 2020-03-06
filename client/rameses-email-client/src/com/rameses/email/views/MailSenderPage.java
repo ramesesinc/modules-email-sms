@@ -34,17 +34,13 @@ public class MailSenderPage extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField2 = new com.rameses.rcp.control.XTextField();
-        jPanel1 = new javax.swing.JPanel();
-        xPanel1 = new com.rameses.rcp.control.XPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        xList1 = new com.rameses.rcp.control.XList();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        xList1 = new com.rameses.rcp.control.XList();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         setPreferredSize(new java.awt.Dimension(527, 357));
-        setLayout(new java.awt.BorderLayout());
 
         xFormPanel1.setCaptionWidth(120);
         xFormPanel1.setPadding(new java.awt.Insets(5, 5, 5, 5));
@@ -64,43 +60,44 @@ public class MailSenderPage extends javax.swing.JPanel {
         xTextField2.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField2);
 
-        add(xFormPanel1, java.awt.BorderLayout.PAGE_START);
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 100));
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
-        xPanel1.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setText("Attachments");
-        xPanel1.add(jLabel1, java.awt.BorderLayout.NORTH);
-
-        xList1.setExpression("#{ item.filename }");
-        xList1.setItems("attachments");
-        jScrollPane2.setViewportView(xList1);
-
-        xPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jPanel1.add(xPanel1, java.awt.BorderLayout.CENTER);
-
-        add(jPanel1, java.awt.BorderLayout.SOUTH);
-
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 100));
 
         xTextArea1.setName("mail.message"); // NOI18N
         jScrollPane1.setViewportView(xTextArea1);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        xList1.setExpression("#{ item.filename }");
+        xList1.setItems("attachments");
+        jScrollPane2.setViewportView(xList1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XList xList1;
-    private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;

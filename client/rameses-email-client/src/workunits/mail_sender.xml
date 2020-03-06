@@ -1,6 +1,8 @@
 <workunit>
     <invokers>
         <invoker type="mail_sender" caption="Mail Sender" action="init" index="1" target="popup"/>
+        <!-- actions below -->
+        <invoker type="extActions" caption="Edit Template" action="editTemplate" immediate="true"/>
     </invokers>
     <code class="com.rameses.email.models.MailSenderModel" />
     <pages>

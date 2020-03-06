@@ -21,6 +21,9 @@ public class MailSenderModel {
     @Caller
     def caller;
     
+    @Binding
+    def binding;
+    
     String name;
     String mailto;
     def entity;
@@ -30,6 +33,10 @@ public class MailSenderModel {
     
     def getQuerySvc() {
         return InvokerProxy.instance.create("QueryService", null, caller.getConnection() );
+    }
+    
+    public String getConnection() {
+        return caller.getConnection();
     }
     
     def buildMessage()  {
@@ -101,5 +108,15 @@ public class MailSenderModel {
     
     boolean getHasAttachments() {
         return true;
+    }
+    
+    def editTemplate() {
+        def h = { o->
+            if(MsgBox.confirm("Do you want to replace existing message with template?")) {
+                mail.message = buildMessage();
+                binding.refresh();
+            }
+        }
+        return Inv.lookupOpener( "sys_email_template", [name: name, handler : h] );
     }
 }
