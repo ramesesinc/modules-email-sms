@@ -68,6 +68,7 @@ public class MailSenderModel {
         }
     }
     
+    
     def doOk() {
         def m = [:];
         m.to = mail.to;
