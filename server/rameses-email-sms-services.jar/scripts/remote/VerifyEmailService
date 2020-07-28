@@ -16,7 +16,7 @@ public class VerifyEmailService {
 	def self;
 
 	@ProxyMethod
-	public def verifyEmail(data) {
+	public def verifyEmail( data ) { 
 		if( !data.email ) throw new Exception("Please provide an email");
 
 		Random rand = new Random();

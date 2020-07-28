@@ -2,15 +2,16 @@ import com.rameses.annotations.*;
 
 class SMSService {
 
-	@Service(value='SMSAPI', connection="sms-service")
-	def smsApi; 
+	@Service(value="SMSService", connection="sms-service")
+	def remote;
 
 	@ProxyMethod
-	public Map send( Map data ) {  
-		if ( !data.phoneno ) throw new Exception('phoneno parameter is required in SMSService'); 
-		if ( !data.message ) throw new Exception('message parameter is required in SMSService'); 
-		//if ( !data.orgcode ) throw new Exception('orgcode parameter is required in SMSService')
-		return smsApi.send(data); 		
-	}
-	 
+	public Map send( Map param ) {  
+		if ( !param.phoneno ) throw new Exception('phoneno parameter is required in SMSService'); 
+		if ( !param.message ) throw new Exception('message parameter is required in SMSService'); 
+
+		if ( !param.objid ) param.objid = 'MSG'+ new java.rmi.server.UID(); 
+
+		return remote.send( param ); 
+	} 
 } 
