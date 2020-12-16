@@ -30,10 +30,16 @@ public class MailSender {
     
     private Map conf;
     private String smtphost;
+    private String smtpport;
     
     public MailSender( Map conf ) {
         this.conf = conf;
         smtphost = (String)conf.get("mail.smtp.host");
+        
+        smtpport = (String)conf.get("mail.smtp.port");
+        if ( smtpport == null || smtpport.trim().length() == 0 ) {
+            smtpport = "25";
+        }
     }
     
     public void send( Map info ) throws Exception {
@@ -49,9 +55,9 @@ public class MailSender {
         List<String> attachments = (List)info.get("attachments");
         
         try { 
-            Properties properties = new Properties();
+            Properties properties = new Properties(); 
             properties.setProperty("mail.smtp.host", smtphost); 
-            properties.setProperty("mail.smtp.port", "25");
+            properties.setProperty("mail.smtp.port", smtpport); 
             
             if( info.containsKey("debug")) {
                 properties.setProperty("mail.debug", info.get("debug").toString() );                
@@ -93,6 +99,4 @@ public class MailSender {
         } 
         
     }
-    
-    
 }
